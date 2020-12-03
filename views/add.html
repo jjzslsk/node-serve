@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v4.1.1">
+    <title>Dashboard Template · Bootstrap</title>
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <script src="/static/js/jquery.min.js"></script>
+</head>
+<body>
+    <div class="panel panel-success">
+        <div class="input-group input-group-lg">
+            <input type="text" class="form-control username" name="user" placeholder="用户名" aria-describedby="sizing-addon1">
+          </div>
+          <div class="input-group input-group-lg">
+            <input type="password" class="form-control password" name="paw" placeholder="密码" aria-describedby="sizing-addon1">
+          </div>
+          <button class="button-submit" type="submit">提交</button>
+    </div>
+</body>
+<script>
+  $('.button-submit').on('click',function (e) {
+      let param = {
+          username:$('.username').val(),
+          password:$('.password').val()
+      }
+       $.ajax({
+           url:`/addUser?username=${param.username}&&password=${param.password}`,
+           type:'get',
+           success:function (result) {
+               console.log(JSON.stringify(result))
+               if(result.success){
+                  alert('添加成功');
+                  window.location.href = "http://node.jjzslsk.top:3000/";
+                // window.location.href = "http://localhost:3000/";
+
+               }else{
+                  alert('添加失败');
+               }
+           },
+           error:function (msg) {
+               alert('系统发生错误');
+           }
+       })
+   })
+</script>
+</html>
