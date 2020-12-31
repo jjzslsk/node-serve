@@ -4,6 +4,10 @@ nodemon app.js
 全局安装nodemon 热更新
 npm install --g nodemon
 
+打开mongo
+cd D:\lsk\mongodb\bin
+λ mongo
+
 链接远程服务器
 cd D:\lsk\mongodb\bin 
 λ mongo 97.64.21.179:27018
@@ -12,10 +16,6 @@ cd D:\lsk\mongodb\bin
 连接本地数据库
 cd D:\lsk\mongodb\bin 
 λ mongod --dbpath=..\data\db
-
-打开mongo
-cd D:\lsk\mongodb\bin
-λ mongo
 
 显示数据库列表,所有集合
 show dbs
