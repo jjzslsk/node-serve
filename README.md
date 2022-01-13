@@ -1,5 +1,17 @@
+安装mongoDB教程
+启动服务配置如：D:\Program Files\MongoDB\Server\5.0\bin mongod --dbpath "D:\lsk\mongodb\data\db" --logpath "D:\lsk\mongodb\data\log" -install -serviceName "MongoDB"
+
+启动mongdb 查看是否启动成功
+http://127.0.0.1:27017/
+
+启动app.js
+npm run serve
+http://127.0.0.1:3000/
+
 热更新
 nodemon app.js
+
+先链接-再mongo-
 
 全局安装nodemon 热更新
 npm install --g nodemon
@@ -10,7 +22,7 @@ cd D:\lsk\mongodb\bin
 
 链接远程服务器
 cd D:\lsk\mongodb\bin 
-λ mongo 97.64.21.179:27018
+λ mongo 171.104.147.24:27018
 成功后 可以查表了  show dbs
 
 连接本地数据库
