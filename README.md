@@ -1,7 +1,7 @@
 安装mongoDB教程
 启动服务配置如：D:\Program Files\MongoDB\Server\5.0\bin mongod --dbpath "D:\lsk\mongodb\data\db" --logpath "D:\lsk\mongodb\data\log" -install -serviceName "MongoDB"
 
-启动mongdb 查看是否启动成功
+启动mongdb 查看是否启动成 功
 http://127.0.0.1:27017/
 
 启动app.js
