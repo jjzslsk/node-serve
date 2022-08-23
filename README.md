@@ -1,8 +1,21 @@
 安装mongoDB教程
 启动服务配置如：D:\Program Files\MongoDB\Server\5.0\bin mongod --dbpath "D:\lsk\mongodb\data\db" --logpath "D:\lsk\mongodb\data\log" -install -serviceName "MongoDB"
 
+启动 win MongoDB服务
+net start MongoDB
+关闭
+net stop MongoDB
+移除
+C:\mongodb\bin\mongod.exe --remove
+
 启动mongdb 查看是否启动成 功
 http://127.0.0.1:27017/
+
+装依赖
+npm install
+
+全局安装nodemon 热更新
+npm install --g nodemon
 
 启动app.js
 npm run serve
@@ -13,8 +26,7 @@ nodemon app.js
 
 先链接-再mongo-
 
-全局安装nodemon 热更新
-npm install --g nodemon
+
 
 打开mongo
 cd D:\lsk\mongodb\bin

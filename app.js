@@ -2,8 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose');
 const app = express()
 const port = 3000
-mongoose.connect('mongodb://localhost:27018/users');
-// mongoose.connect('mongodb://localhost:27017/users');
+// mongoose.connect('mongodb://jjzslsk.gicp.net:40203/users');
+mongoose.connect('mongodb://localhost:27017/users');
 
 var Schema = mongoose.Schema;
 

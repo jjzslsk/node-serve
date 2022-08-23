@@ -69,8 +69,10 @@
                console.log(JSON.stringify(result))
                if(result.success){
                   alert('登录成功');
-                  window.location.href = "http://node.jjzslsk.top:3000/";
+                //   window.location.href = "http://node.jjzslsk.top:3000/";
                 //   window.location.href = "http://localhost:3000/";
+                let baseUrl = window.location.protocol + "//" + window.location.host;
+                window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000/";
                }else{
                   alert('登录失败');
                }
