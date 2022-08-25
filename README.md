@@ -8,7 +8,7 @@ net stop MongoDB
 移除
 C:\mongodb\bin\mongod.exe --remove
 
-启动mongdb 查看是否启动成 功
+启动mongdb 查看是否启动成功
 http://127.0.0.1:27017/
 
 装依赖
