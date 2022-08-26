@@ -10,6 +10,7 @@
     <title>Dashboard Template · Bootstrap</title>
     <link href="/static/css/bootstrap.css" rel="stylesheet">
     <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/index.js"></script>
 </head>
 <body>
@@ -36,12 +37,10 @@
                console.log(JSON.stringify(result))
                if(result.success){
                   alert('添加成功');
-                //   window.location.href = "http://node.jjzslsk.top:3000/";
-                // window.location.href = "http://localhost:3000/";
                 let baseUrl = window.location.protocol + "//" + window.location.host;
                 window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000/";
                }else{
-                  alert('添加失败');
+                  alert(result.message);
                }
            },
            error:function (msg) {

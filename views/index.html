@@ -7,7 +7,7 @@
   <meta name="description" content="">
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v4.1.1">
-  <title>Dashboard Template · Bootstrap</title>
+  <title>用户管理</title>
   <link href="/static/css/bootstrap.css" rel="stylesheet">
   <link href="/static/css/index.css" rel="stylesheet">
   <script src="/static/js/jquery.min.js"></script>
@@ -37,7 +37,8 @@
     <div class="panel-body">
       <div class="page-header">
         <h1>Example page header <small>Subtext for header</small>
-          <button type="submit" class="btn"><a href="login.html">登录</a></button>
+          <!-- <button type="submit" class="btn"><a href="login.html">登录</a></button> -->
+          <button type="submit" id="logout" class="btn"><a>退出</a></button>
         </h1>
       </div>
       <div class="container-fluid">
@@ -50,20 +51,28 @@
                 <thead>
                   <tr>
                     <th>#</th>
-                    <th>姓名</th>
-                    <th>年龄</th>
+                    <th>用户名</th>
+                    <th>密码</th>
+                    <th>id</th>
+                    <th>操作</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{each userList item i}}
+                  {{each userList item index}}
                   <tr>
-                    <td>{{i}}</td>
+                    <td>{{index}}</td>
                     <td>{{item.user}}</td>
                     <td>{{item.paw}}</td>
+                    <td>{{item._id}}</td>
+                    <td id="tool"><button class="edit" _id={{item._id}}>编辑</button><button class="del" _id={{item._id}}>删除</button></td>
                   </tr>
                   {{/each}}
                 </tbody>
               </table>
+              <img src="/static/img/123.gif" alt="" srcset="">
+              <video controls>
+                <source src="/static/video/big_buck_bunny.mp4">
+              </video>
             </div>
           </main>
         </div>
@@ -74,3 +83,14 @@
 
 
 </html>
+<script>
+$('#logout').click(function(){
+  logoutFn()
+})
+$('#tool .edit').click(function(e){
+  edit($(e.target).attr('_id'))
+})
+$('#tool .del').click(function(e){
+  del($(e.target).attr('_id'))
+})
+</script>
