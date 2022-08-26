@@ -130,47 +130,56 @@ app.get('/editUser',(req,resp)=>{
     })
 })
 app.get('/addUser', (req, resp) =>{
-    const param = new User({
-        user:req.query.username,
-        paw:req.query.password,
-    })
-    User.find({user:req.query.username},function(err,ret){
-        if(err){
-            console.log('查询失败',err)
-        }else{
-            if(ret.length > 0){
-                console.log('查询成功',ret)
-                const param = {
-                    code: 200,
-                    message: "用户已存在",
-                    success: false
-                }
-                resp.send(param)
+    if(req.query.username && req.query.password){
+        const param = new User({
+            user:req.query.username,
+            paw:req.query.password,
+        })
+        User.find({user:req.query.username},function(err,ret){
+            if(err){
+                console.log('查询失败',err)
             }else{
-                param.save(function(err,res){
-                    if(err){
-                        console.log('保存失败')
-                        const param = {
-                            code: 1,
-                            data: res,
-                            message: "保存失败",
-                            success: false
-                        }
-                        resp.send(param)
-                    }else{
-                        console.log('保存成功')
-                        const param = {
-                            code: 0,
-                            data: res,
-                            message: "保存成功",
-                            success: true
-                        }
-                        resp.send(param)
+                if(ret.length > 0){
+                    console.log('查询成功',ret)
+                    const param = {
+                        code: 200,
+                        message: "用户已存在",
+                        success: false
                     }
-                })
+                    resp.send(param)
+                }else{
+                    param.save(function(err,res){
+                        if(err){
+                            console.log('保存失败')
+                            const param = {
+                                code: 1,
+                                data: res,
+                                message: "保存失败",
+                                success: false
+                            }
+                            resp.send(param)
+                        }else{
+                            console.log('保存成功')
+                            const param = {
+                                code: 0,
+                                data: res,
+                                message: "保存成功",
+                                success: true
+                            }
+                            resp.send(param)
+                        }
+                    })
+                }
             }
-        }
-    })
+        })
+
+    }else{
+        resp.send({
+            code: 0,
+            message: "请输入完整信息",
+            success: false
+        })
+    }
     
 })
 app.get('/login.html', (req, res) =>{
