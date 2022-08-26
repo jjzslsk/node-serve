@@ -1,9 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose');
+const fs = require('fs');
 const app = express()
+const multer  = require('multer')
 const port = 3000
 mongoose.connect('mongodb://localhost:27017/users');
-
 var Schema = mongoose.Schema;
 
 //建立数据模型
@@ -23,6 +24,48 @@ app.engine('html', require('express-art-template'));
 // });
 // app.set('views', path.join(__dirname, 'views'));
 // app.set('view engine', 'art');
+
+//文件上传
+var createFolder = function(folder){
+    try{
+        fs.accessSync(folder); 
+    }catch(e){
+        fs.mkdirSync(folder);
+    }  
+};
+var uploadFolder = 'upload';
+createFolder(uploadFolder);
+// 通过 filename 属性定制
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadFolder);    // 保存的路径，备注：需要自己创建
+    },
+    filename: function (req, file, cb) {
+        console.log("🚀 ~ file", file)
+        // 将保存文件名设置为 字段名 + 时间戳，比如 logo-1478521468943
+        // cb(null, file.fieldname + '-' + Date.now());  
+        cb(null, file.originalname);
+    }
+});
+// 通过 storage 选项来对 上传行为 进行定制化
+var upload = multer({ storage: storage })
+// 单图上传
+app.post('/upload', upload.single('logo'), function(req, res, next){
+    var file = req.file;
+    res.send({ret_code: '0'});
+});
+
+app.get('/form', function(req, res, next){
+    var form = fs.readFileSync('./views/form.html', {encoding: 'utf8'});
+    res.send(form);
+});
+
+
+
+
+
+
+
 
 app.get('/', (req, res) =>{
     User.find(function(err,ret){
@@ -194,5 +237,7 @@ app.get('/login.html', (req, res) =>{
 app.get('/add.html', (req, res) =>{
     res.render('add.html');
 })
+
+
 app.use('/static', express.static('public'))
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
