@@ -68,7 +68,8 @@
              success:function (result) {
                console.log(JSON.stringify(result))
                if(result.success){
-                  alert('登录成功');
+                localStorage.setItem('token',result.data[0]._id)
+                alert('登录成功');
                 //   window.location.href = "http://node.jjzslsk.top:3000/";
                 //   window.location.href = "http://localhost:3000/";
                 let baseUrl = window.location.protocol + "//" + window.location.host;
