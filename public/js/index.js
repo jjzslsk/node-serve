@@ -49,3 +49,37 @@ function del(id){
       }
   })
 }
+
+function psotFn(){
+  $.ajax({
+      type:'post',
+      data:{id: 'id'},
+      url: "/ActiveCommand1",
+      success:function (result) {
+          console.log(JSON.stringify(result))
+      },
+      error:function (msg) {
+          alert('系统发生错误');
+      }
+  })
+}
+
+function delFile(data){
+  $.ajax({
+      type:'get',
+      data:{file: data},
+      contentType: 'application/json',
+      url: "/ActiveCommand2",
+      success:function (result) {
+          if(result == 'success'){
+          let baseUrl = window.location.protocol + "//" + window.location.host;
+          window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000";
+          }else{
+            alert(result);
+          }
+      },
+      error:function (msg) {
+          alert('系统发生错误');
+      }
+  })
+}

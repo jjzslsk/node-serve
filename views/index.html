@@ -27,6 +27,9 @@
         font-size: 3.5rem;
       }
     }
+    .upImg{
+      width: 100px;
+    }
   </style>
 </head>
 <body>
@@ -40,6 +43,8 @@
       </div>
       <div class="container-fluid">
         <button type="submit" class="btn"><a href="add.html">添加</a></button>
+        <button type="submit" class="btn"><a href="form">图片上传</a></button>
+        <button type="submit" class="btn" id="psotFn"><a>打开记事本</a></button>
         <div class="row">
           <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <h2>{{title}}</h2>
@@ -66,11 +71,18 @@
                   {{/each}}
                 </tbody>
               </table>
-              <img src="/static/img/123.gif" alt="" srcset="">
-              <video controls>
+
+              <!-- <img src="/static/img/123.gif" alt="" srcset=""> -->
+              <!-- <video controls>
                 <source src="/static/video/big_buck_bunny.mp4">
-              </video>
+              </video> -->
             </div>
+            {{each imgList item index}}
+                <a href="http://localhost:3000/static/upload/{{item}}">{{item}}</a>
+                <img class="upImg" src="/static/upload/{{item}}" alt="" srcset="">
+                <span class="delFile" name="{{item}}">del</span>
+                <br>
+            {{/each}}
           </main>
         </div>
       </div>
@@ -89,5 +101,12 @@ $('#tool .edit').click(function(e){
 })
 $('#tool .del').click(function(e){
   del($(e.target).attr('_id'))
+})
+
+$('#psotFn').click(function(){
+  psotFn()
+})
+$('.delFile').click(function(e){
+  delFile($(e.target).attr('name'))
 })
 </script>
