@@ -77,9 +77,17 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 // 单图上传
 app.post('/upload', upload.single('singleFile'), function(req, res, next){
-    res.render('js.html',{
+    res.send(
+        `
+        <script>
+            let baseUrl = window.location.protocol + "//" + window.location.host;
+            window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000";
+        </script>
+        `
+    )
+    // res.render('js.html',{
 
-    })
+    // })
 });
 
 app.get('/form', function(req, res, next){
