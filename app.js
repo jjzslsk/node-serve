@@ -132,7 +132,22 @@ app.get('/', (req, res) =>{
                     imgList: imgList
                 });
             }
-        })
+        }).catch((e=>{
+            if(err){
+                console.log('查询失败',err)
+                res.render('index.html', {
+                    title:'通讯录',
+                    userList:[],
+                    imgList: imgList
+                });
+            }else{
+                res.render('index.html', {
+                    title:'通讯录',
+                    userList:ret,
+                    imgList: imgList
+                });
+            }
+        }))
         
     })
 })
