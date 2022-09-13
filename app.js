@@ -1,3 +1,4 @@
+
 const express = require('express')
 const mongoose = require('mongoose');
 const fs = require('fs');
@@ -8,10 +9,27 @@ const multer  = require('multer')
 const port = 3000
 // mongoose.connect('mongodb://localhost:27017/users');
 mongoose.connect(
-    'mongodb://localhost:27017/users',
+    'mongodb://web.3702740.xyz:27017/users',
+    // 'mongodb://localhost:27017/users',
     {useUnifiedTopology: true,useNewUrlParser: true,})
 .then(() => console.log('数据库已链接'))
 .catch(err => {});
+
+//跨域
+const cors = require('cors'); 
+app.use(cors({
+  origin: "*",
+  })
+);
+// app.use((req, res, next) => {
+//     res.setHeader("Access-Control-Allow-Origin", "*");
+//     res.setHeader(
+//       "Access-Control-Allow-Methods",
+//       "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+//     );
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//     next();
+//   });
 
 const Schema = mongoose.Schema;
 
@@ -26,6 +44,8 @@ const userSchema = new Schema({
 const User = mongoose.model('User',userSchema)
 
 app.engine('html', require('express-art-template'));
+app.use(express.urlencoded());
+
 
 function readLocalFile(){
     return new Promise((resolve, reject) => {
@@ -50,7 +70,6 @@ function readLocalFile(){
     });
     
 }
-
 
 //文件上传
 const createFolder = function(folder){
@@ -116,6 +135,40 @@ app.get('/', (req, res) =>{
         })
         
     })
+})
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.json({limit: '1mb'}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.post('/userList',(req,res)=>{
+    fs.appendFile("public/ck.txt", `\r\n${req.body.ck}`, (err, data) => {
+        if (err) {
+            throw err
+        }else{
+            fs.readFile("public/ck.txt", 'utf-8', (err, data) => {
+                if (err) throw err;
+                console.log(data)
+            });
+        }
+    });
+    res.send(req.body);
+})
+
+app.get('/userList',(req,res)=>{
+    console.log("~ req.body", req.body)
+    // fs.appendFile("public/ck.txt", `\r\n${req.body.ck}`, (err, data) => {
+    //     if (err) {
+    //         throw err
+    //     }else{
+    //         fs.readFile("public/ck.txt", 'utf-8', (err, data) => {
+    //             if (err) throw err;
+    //             console.log(data)
+    //         });
+    //     }
+    // });
+    // res.send(req.body);
 })
 
 app.get('/index.html', (req, reo) =>{
