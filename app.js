@@ -53,7 +53,7 @@ function readLocalFile(){
         var dirs = [];
         let data = fs.readdir(pathName, function(err, files){
             (function iterator(i){
-            if(i == files.length) {
+            if(files && i == files.length) {
                 dirs = dirs
                 // console.log(dirs);
                 resolve(dirs)
