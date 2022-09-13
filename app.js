@@ -53,7 +53,7 @@ function readLocalFile(){
         var dirs = [];
         let data = fs.readdir(pathName, function(err, files){
             (function iterator(i){
-            if(files && i == files.length) {
+            if(i == files.length) {
                 dirs = dirs
                 // console.log(dirs);
                 resolve(dirs)
@@ -117,37 +117,37 @@ app.get('/form', function(req, res, next){
 
 app.get('/', (req, res) =>{
     User.find(function(err,ret){
-        readLocalFile().then((imgList)=>{
-            if(err){
-                console.log('查询失败',err)
-                res.render('index.html', {
-                    title:'通讯录',
-                    userList:[],
-                    imgList: imgList
-                });
-            }else{
-                res.render('index.html', {
-                    title:'通讯录',
-                    userList:ret,
-                    imgList: imgList
-                });
-            }
-        }).catch((e=>{
-            if(err){
-                console.log('查询失败',err)
-                res.render('index.html', {
-                    title:'通讯录',
-                    userList:[],
-                    imgList: imgList
-                });
-            }else{
-                res.render('index.html', {
-                    title:'通讯录',
-                    userList:ret,
-                    imgList: imgList
-                });
-            }
-        }))
+        // readLocalFile().then((imgList)=>{
+        //     if(err){
+        //         console.log('查询失败',err)
+        //         res.render('index.html', {
+        //             title:'通讯录',
+        //             userList:[],
+        //             imgList: imgList
+        //         });
+        //     }else{
+        //         res.render('index.html', {
+        //             title:'通讯录',
+        //             userList:ret,
+        //             imgList: imgList
+        //         });
+        //     }
+        // })
+
+        if(err){
+            console.log('查询失败',err)
+            res.render('index.html', {
+                title:'通讯录',
+                userList:[],
+                imgList: []
+            });
+        }else{
+            res.render('index.html', {
+                title:'通讯录',
+                userList:ret,
+                imgList: []
+            });
+        }
         
     })
 })
