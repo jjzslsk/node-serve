@@ -11,9 +11,12 @@ const port = 3000
 mongoose.connect(
     'mongodb://web.3702740.xyz:27017/users',
     // 'mongodb://localhost:27017/users',
-    {useUnifiedTopology: true,useNewUrlParser: true,})
+    {useUnifiedTopology: true,useNewUrlParser: true}
+)
 .then(() => console.log('数据库已链接'))
-.catch(err => {});
+.catch(err => {
+    console.log('数据库链接失败')
+});
 
 //跨域
 const cors = require('cors'); 
@@ -99,8 +102,7 @@ app.post('/upload', upload.single('singleFile'), function(req, res, next){
     res.send(
         `
         <script>
-            let baseUrl = window.location.protocol + "//" + window.location.host;
-            window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000";
+            window.location.href = window.location.origin
         </script>
         `
     )
@@ -133,22 +135,20 @@ app.get('/', (req, res) =>{
         //         });
         //     }
         // })
-
-        if(err){
-            console.log('查询失败',err)
-            res.render('index.html', {
-                title:'通讯录',
-                userList:[],
-                imgList: []
-            });
-        }else{
+        if(!err && ret){
             res.render('index.html', {
                 title:'通讯录',
                 userList:ret,
                 imgList: []
             });
+        }else{
+            console.log('查询用户列表失败',err)
+            res.render('index.html', {
+                title:'通讯录',
+                userList:[],
+                imgList: []
+            });
         }
-        
     })
 })
 

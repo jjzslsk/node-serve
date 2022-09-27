@@ -3,8 +3,7 @@ if(localStorage.getItem('token') && localStorage.getItem('token').length > 0){
   
 }else{
   console.log('未登录')
-  let baseUrl = window.location.protocol + "//" + window.location.host;
-  window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000/login.html";
+  window.location.href = `${window.location.origin}/login.html`
 }
 function logoutFn(){
     localStorage.removeItem('token')
@@ -19,8 +18,7 @@ function edit(id){
       success:function (result) {
           console.log(JSON.stringify(result))
           if(result.success){
-          let baseUrl = window.location.protocol + "//" + window.location.host;
-          window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000/index.html";
+            window.location.href = `${window.location.origin}`
           }else{
             alert(result.message);
           }
@@ -38,8 +36,7 @@ function del(id){
       success:function (result) {
           console.log(JSON.stringify(result))
           if(result.success){
-          let baseUrl = window.location.protocol + "//" + window.location.host;
-          window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000/index.html";
+            window.location.href = `${window.location.origin}`
           }else{
             alert(result.message);
           }
@@ -72,8 +69,7 @@ function delFile(data){
       url: "/ActiveCommand2",
       success:function (result) {
           if(result == 'success'){
-          let baseUrl = window.location.protocol + "//" + window.location.host;
-          window.location.href = baseUrl.substring(0, baseUrl.length-4) + "3000";
+            window.location.href = `${window.location.origin}`
           }else{
             alert(result);
           }
